@@ -3,37 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    // Menampilkan halaman Register
-    public function showRegister()
-    {
-        return view('auth.register');
-    }
-
-    // Memproses pendaftaran akun
-    public function register(Request $request)
-    {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
-
-        User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'password' => Hash::make($validated['password']),
-        ]);
-
-        return redirect()->route('login')
-            ->with('success', 'Akun berhasil dibuat! Silakan login.');
-    }
-
     // Menampilkan halaman Login
     public function showLogin()
     {
@@ -49,6 +22,7 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+            // Memperbarui session setelah login
             $request->session()->regenerate();
 
             return redirect()->intended('/dashboard')
@@ -65,11 +39,15 @@ class AuthController extends Controller
     {
         Auth::logout();
 
+        // Menghapus session pengguna
         $request->session()->invalidate();
+
+        // Membuat token CSRF baru
         $request->session()->regenerateToken();
 
         return redirect()->route('login')
             ->with('success', 'Berhasil logout.');
     }
 }
+
 

@@ -141,6 +141,7 @@
 
 @section('content')
 
+    <!-- Judul halaman dan tombol tambah -->
     <div class="top-bar">
         <div>
             <h2>Daftar Pesanan</h2>
@@ -164,6 +165,17 @@
     @if (session('error'))
         <div class="error">
             {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="error">
+            <strong>Terjadi kesalahan:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
         </div>
     @endif
 
@@ -227,18 +239,24 @@
                                         Edit
                                     </a>
 
-                                    <form
-                                        action="{{ route('orders.destroy', $order->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
+                                    <!-- Hapus hanya untuk Admin -->
+                                    @if (auth()->user()->isAdmin())
 
-                                        @csrf
-                                        @method('DELETE')
+                                        <form
+                                            action="{{ route('orders.destroy', $order->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
 
-                                        <button type="submit" class="btn btn-delete">
-                                            Hapus
-                                        </button>
-                                    </form>
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-delete">
+                                                Hapus
+                                            </button>
+
+                                        </form>
+
+                                    @endif
 
                                 </div>
                             </td>
@@ -252,6 +270,7 @@
     </div>
 
 @endsection
+
 
 
 

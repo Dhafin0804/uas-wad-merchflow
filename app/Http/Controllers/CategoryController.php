@@ -64,6 +64,16 @@ class CategoryController extends Controller
     // Menghapus kategori
     public function destroy(Category $category): RedirectResponse
     {
+        // Periksa apakah kategori masih memiliki produk
+        if ($category->products()->exists()) {
+            return redirect()
+                ->route('categories.index')
+                ->with(
+                    'error',
+                    'Kategori tidak dapat dihapus karena masih memiliki produk.'
+                );
+        }
+
         $category->delete();
 
         return redirect()
@@ -71,4 +81,5 @@ class CategoryController extends Controller
             ->with('success', 'Kategori berhasil dihapus.');
     }
 }
+
 

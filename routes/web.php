@@ -12,30 +12,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// ==============================
-// ROUTE AUTHENTICATION
-// ==============================
-
-Route::get('/register', [AuthController::class, 'showRegister'])
-    ->name('register');
-
-Route::post('/register', [AuthController::class, 'register'])
-    ->name('register.store');
-
+// Authentication
 Route::get('/login', [AuthController::class, 'showLogin'])
     ->name('login');
 
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.process');
 
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
-
-// ==============================
-// ROUTE YANG MEMBUTUHKAN LOGIN
-// ==============================
-
+// Semua halaman internal membutuhkan login
 Route::middleware('auth')->group(function () {
+
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])
+        ->name('logout');
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])
@@ -57,9 +46,6 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update'])
         ->name('products.update');
 
-    Route::delete('/products/{product}', [ProductController::class, 'destroy'])
-        ->name('products.destroy');
-
     // Kategori
     Route::get('/categories', [CategoryController::class, 'index'])
         ->name('categories.index');
@@ -76,10 +62,20 @@ Route::middleware('auth')->group(function () {
     Route::put('/categories/{category}', [CategoryController::class, 'update'])
         ->name('categories.update');
 
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
-        ->name('categories.destroy');
-
     // Pesanan
-    Route::resource('orders', OrderController::class);
+    Route::resource('orders', OrderController::class)
+        ->except(['destroy']);
 
+    // Khusus Admin
+    Route::middleware('role:admin')->group(function () {
+
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])
+            ->name('products.destroy');
+
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])
+            ->name('categories.destroy');
+
+        Route::delete('/orders/{order}', [OrderController::class, 'destroy'])
+            ->name('orders.destroy');
+    });
 });

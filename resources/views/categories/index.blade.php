@@ -207,27 +207,32 @@
                             Edit
                         </a>
 
-                        @if ($category->products_count == 0)
+                        @if (auth()->user()->isAdmin())
 
-                            <form
-                                action="{{ route('categories.destroy', $category->id) }}"
-                                method="POST"
-                                onsubmit="return confirm('Apakah kamu yakin ingin menghapus kategori ini?')">
+                            @if ($category->products_count == 0)
 
-                                @csrf
-                                @method('DELETE')
+                                <form
+                                    action="{{ route('categories.destroy', $category->id) }}"
+                                    method="POST"
+                                    onsubmit="return confirm('Apakah kamu yakin ingin menghapus kategori ini?')">
 
-                                <button type="submit" class="btn btn-delete">
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="btn btn-delete">
+                                        Hapus
+                                    </button>
+
+                                </form>
+
+                            @else
+
+                                <button type="button" class="btn btn-disabled" disabled
+                                        title="Kategori masih memiliki produk">
                                     Hapus
                                 </button>
 
-                            </form>
-
-                        @else
-
-                            <button type="button" class="btn btn-disabled" disabled>
-                                Hapus
-                            </button>
+                            @endif
 
                         @endif
 

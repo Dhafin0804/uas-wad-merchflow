@@ -10,6 +10,7 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
+    // Menampilkan semua produk
     public function index(): View
     {
         $products = Product::with('category')
@@ -19,6 +20,7 @@ class ProductController extends Controller
         return view('products.index', compact('products'));
     }
 
+    // Menampilkan form tambah produk
     public function create(): View
     {
         $categories = Category::orderBy('name')->get();
@@ -26,6 +28,7 @@ class ProductController extends Controller
         return view('products.create', compact('categories'));
     }
 
+    // Menyimpan produk baru
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
@@ -44,13 +47,15 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil ditambahkan.');
     }
 
+    // Menampilkan form edit produk
     public function edit(Product $product): View
     {
-    $categories = Category::orderBy('name')->get();
+        $categories = Category::orderBy('name')->get();
 
-    return view('products.edit', compact('product', 'categories'));
+        return view('products.edit', compact('product', 'categories'));
     }
 
+    // Memperbarui produk
     public function update(Request $request, Product $product): RedirectResponse
     {
         $validated = $request->validate([
@@ -69,8 +74,19 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil diperbarui.');
     }
 
+    // Menghapus produk
     public function destroy(Product $product): RedirectResponse
     {
+        // Periksa apakah produk sudah digunakan dalam pesanan
+        if ($product->orderItems()->exists()) {
+            return redirect()
+                ->route('products.index')
+                ->with(
+                    'error',
+                    'Produk tidak dapat dihapus karena sudah digunakan dalam pesanan.'
+                );
+        }
+
         $product->delete();
 
         return redirect()
@@ -78,3 +94,4 @@ class ProductController extends Controller
             ->with('success', 'Produk berhasil dihapus.');
     }
 }
+

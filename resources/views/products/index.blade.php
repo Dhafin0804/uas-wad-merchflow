@@ -283,19 +283,24 @@
                             Edit
                         </a>
 
-                        <form
-                            action="{{ route('products.destroy', $product->id) }}"
-                            method="POST"
-                            onsubmit="return confirm('Apakah kamu yakin ingin menghapus produk ini?')">
+                        <!-- Tombol hapus hanya untuk Admin -->
+                        @if(auth()->user()->isAdmin())
 
-                            @csrf
-                            @method('DELETE')
+                            <form
+                                action="{{ route('products.destroy', $product->id) }}"
+                                method="POST"
+                                onsubmit="return confirm('Apakah kamu yakin ingin menghapus produk ini?')">
 
-                            <button type="submit" class="btn btn-delete">
-                                Hapus
-                            </button>
+                                @csrf
+                                @method('DELETE')
 
-                        </form>
+                                <button type="submit" class="btn btn-delete">
+                                    Hapus
+                                </button>
+
+                            </form>
+
+                        @endif
 
                     </div>
 
@@ -308,4 +313,5 @@
     @endif
 
 @endsection
+
 

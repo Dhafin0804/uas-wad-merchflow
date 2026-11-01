@@ -152,11 +152,6 @@
             <button type="submit">Login</button>
         </form>
 
-        <div class="register-link">
-            Belum punya akun?
-            <a href="{{ route('register') }}">Daftar di sini</a>
-        </div>
-
     </div>
 
 </body>
