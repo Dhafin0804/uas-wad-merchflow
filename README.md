@@ -1,4 +1,4 @@
-## MerchFlow — Merchandise Management System
+# MerchFlow — Merchandise Management System
 
 Aplikasi web berbasis Laravel untuk membantu pengelolaan operasional bisnis merchandise, mulai dari manajemen kategori dan produk, pengelolaan pesanan pelanggan, pemantauan stok, hingga pengaturan hak akses pengguna.
 
@@ -19,7 +19,7 @@ MerchFlow dirancang untuk mempermudah proses pengelolaan pesanan merchandise aga
 | Pola aplikasi | Model-View-Controller (MVC) |
 | Deployment | Clever Cloud |
 | Repository | [GitHub — uas-wad-merchflow](https://github.com/Dhafin0804/uas-wad-merchflow) |
-| URL aplikasi | https://uas-wad-merchflow.cleverapps.io |
+| URL aplikasi | [https://uas-wad-merchflow.cleverapps.io](https://uas-wad-merchflow.cleverapps.io) |
 
 ## 2. Deskripsi Aplikasi
 
@@ -38,6 +38,7 @@ Melalui MerchFlow, pengguna dapat mengelola kategori produk, melakukan pencatata
 Fitur autentikasi digunakan untuk mengatur akses pengguna ke dalam aplikasi.
 
 Fitur yang tersedia:
+
 - Login menggunakan email dan password.
 - Logout dari aplikasi.
 - Pengelolaan session pengguna.
@@ -52,6 +53,7 @@ Sistem menggunakan middleware untuk memastikan pengguna hanya dapat mengakses ha
 Dashboard merupakan halaman utama setelah pengguna berhasil login.
 
 Informasi yang ditampilkan meliputi:
+
 - Jumlah produk yang tersedia.
 - Jumlah kategori produk.
 - Jumlah pesanan.
@@ -65,6 +67,7 @@ Dashboard membantu pengguna memperoleh gambaran singkat mengenai kondisi operasi
 Fitur kategori digunakan untuk mengelompokkan produk merchandise agar lebih mudah dikelola.
 
 Fitur yang tersedia:
+
 - Melihat daftar kategori.
 - Menambahkan kategori baru.
 - Mengubah informasi kategori.
@@ -77,6 +80,7 @@ Sistem mencegah penghapusan kategori apabila kategori tersebut masih memiliki pr
 Fitur produk digunakan untuk mengelola informasi merchandise yang tersedia di dalam sistem.
 
 Data produk meliputi:
+
 - Nama produk.
 - Kategori produk.
 - Deskripsi produk.
@@ -86,6 +90,7 @@ Data produk meliputi:
 - Status produk.
 
 Fitur yang tersedia:
+
 - Melihat daftar produk.
 - Menambahkan produk baru.
 - Mengubah informasi produk.
@@ -100,6 +105,7 @@ Sistem menggunakan validasi pada proses penambahan dan perubahan data agar infor
 Fitur pesanan digunakan untuk mencatat dan mengelola permintaan merchandise dari pelanggan.
 
 Informasi pesanan meliputi:
+
 - Nama pelanggan.
 - Nomor telepon pelanggan.
 - Alamat pelanggan.
@@ -111,6 +117,7 @@ Informasi pesanan meliputi:
 - Catatan tambahan.
 
 Fitur yang tersedia:
+
 - Melihat daftar pesanan.
 - Membuat pesanan baru.
 - Mengubah informasi pesanan.
@@ -119,6 +126,7 @@ Fitur yang tersedia:
 - Memperbarui status pesanan.
 
 Status pesanan yang digunakan:
+
 - **Baru:** pesanan baru dicatat ke dalam sistem.
 - **Dikonfirmasi:** pesanan telah dikonfirmasi.
 - **Diproses:** pesanan sedang dikerjakan.
@@ -132,6 +140,7 @@ MerchFlow menghubungkan proses pemesanan dengan jumlah stok produk.
 Ketika pesanan dibuat, sistem akan mengurangi stok produk berdasarkan jumlah yang dipesan.
 
 Aturan perubahan stok:
+
 - Pesanan baru dibuat: stok produk berkurang.
 - Pesanan aktif dibatalkan: stok produk dikembalikan.
 - Pesanan yang dibatalkan diaktifkan kembali: stok produk dikurangi kembali apabila stok mencukupi.
@@ -147,6 +156,7 @@ Untuk menjaga konsistensi data, proses perubahan pesanan dan stok menggunakan da
 Aplikasi menyediakan informasi pesanan melalui dashboard dan halaman pengelolaan pesanan.
 
 Pengguna dapat melihat:
+
 - Jumlah keseluruhan pesanan.
 - Jumlah pesanan berdasarkan status.
 - Informasi pesanan terbaru.
@@ -163,22 +173,23 @@ MerchFlow memiliki dua role pengguna, yaitu Admin dan Staff.
 | Admin | Melihat dashboard, mengelola produk, kategori, dan pesanan, termasuk menambahkan, mengubah, serta menghapus data. |
 | Staff | Melihat dashboard, produk, kategori, dan pesanan; menambahkan serta mengubah data sesuai fitur yang tersedia, tanpa hak menghapus data. |
 
-Pembatasan akses diterapkan melalui middleware role pada route aplikasi dan pemeriksaan hak akses pada tampilan.
+Pembatasan akses diterapkan melalui middleware role pada route aplikasi. Pemeriksaan hak akses dilakukan di sisi server sehingga pembatasan tidak hanya bergantung pada tampilan antarmuka.
 
 ## 5. Akun Tester
 
-Berikut akun yang dapat digunakan untuk melakukan pengujian aplikasi MerchFlow:
+Berikut akun yang dapat digunakan untuk menguji aplikasi MerchFlow:
 
 | Role | Email | Password |
 |---|---|---|
 | Admin | admin@merchflow.test | `password` |
 | Staff | budi@merchflow.test | `password` |
 
-**Catatan penting:**
-- Kedua akun merupakan akun pengujian pada database demo MerchFlow.
-- Password untuk kedua akun adalah `password`.
-- Akun tester tidak dijamin tersedia secara otomatis pada instalasi database baru.
-- Jika menggunakan database baru, pastikan akun sudah dibuat dan kolom `users.role` diatur menjadi `admin` atau `staff` sesuai hak aksesnya.
+**Catatan:**
+
+- Kedua akun merupakan akun demonstrasi MerchFlow.
+- Akun Admin dan Staff disediakan melalui `DatabaseSeeder`.
+- Password disimpan menggunakan mekanisme hashing Laravel.
+- Untuk instalasi database baru, jalankan `php artisan db:seed` setelah migration.
 - Kredensial tersebut hanya untuk pengujian dan demonstrasi, bukan untuk lingkungan produksi.
 
 ## 6. Persyaratan Sistem
@@ -218,8 +229,10 @@ cd uas-wad-merchflow
 1. Buka aplikasi Laragon.
 2. Jalankan layanan MySQL.
 3. Pastikan MySQL berjalan dengan baik.
-4. Buka phpMyAdmin atau database client seperti DBeaver.
-5. Buat database baru, misalnya:
+4. Buka database client seperti DBeaver.
+5. Buat database baru dengan nama `merchflow`.
+
+Contoh perintah SQL:
 
 ```sql
 CREATE DATABASE merchflow;
@@ -227,27 +240,31 @@ CREATE DATABASE merchflow;
 
 ### Langkah 3 — Instal Dependency PHP
 
+Jalankan perintah:
+
 ```bash
 composer install
 ```
+
+Composer akan menginstal dependency PHP yang dibutuhkan oleh aplikasi Laravel.
 
 ### Langkah 4 — Siapkan File Environment
 
 Salin file `.env.example` menjadi `.env`.
 
-PowerShell:
+**PowerShell:**
 
 ```powershell
 Copy-Item .env.example .env
 ```
 
-Command Prompt:
+**Command Prompt:**
 
 ```cmd
 copy .env.example .env
 ```
 
-Sesuaikan konfigurasi database pada `.env`:
+Sesuaikan konfigurasi database pada file `.env`:
 
 ```env
 APP_NAME=MerchFlow
@@ -268,43 +285,81 @@ Sesuaikan nama database, username, dan password dengan konfigurasi MySQL Laragon
 
 ### Langkah 5 — Generate Application Key
 
+Jalankan:
+
 ```bash
 php artisan key:generate
 ```
 
-### Langkah 6 — Jalankan Migration
+Perintah tersebut digunakan untuk membuat application key yang dibutuhkan Laravel.
+
+### Langkah 6 — Siapkan Database
+
+MerchFlow menyediakan dua metode untuk menyiapkan database. Pilih salah satu metode sesuai kebutuhan.
+
+**Metode A — Menggunakan Migration dan Seeder**
+
+Gunakan metode ini apabila ingin membuat database dari awal.
+
+Jalankan migration:
 
 ```bash
 php artisan migrate
 ```
 
-Migration membuat tabel database berdasarkan file yang tersedia pada folder `database/migrations`.
+Migration akan membuat tabel berdasarkan file yang tersedia pada folder `database/migrations`.
 
-Tabel utama MerchFlow:
-- `users`
-- `categories`
-- `products`
-- `orders`
-- `order_items`
+Setelah migration selesai, jalankan seeder:
 
-Selain tabel utama, Laravel dapat membuat tabel pendukung untuk session, cache, queue, dan kebutuhan internal lainnya.
+```bash
+php artisan db:seed
+```
 
-**Penting:** jangan menjalankan `php artisan migrate:fresh` pada database yang berisi data penting karena perintah tersebut menghapus tabel sebelum membuatnya kembali.
+Seeder akan mengisi data awal aplikasi, meliputi:
+
+- Akun Admin dan Staff.
+- Data kategori merchandise.
+- Data produk merchandise.
+
+**Metode B — Menggunakan File SQL**
+
+Gunakan metode ini apabila ingin menggunakan struktur dan data database yang telah diekspor.
+
+1. Buka DBeaver.
+2. Hubungkan DBeaver ke database MySQL lokal.
+3. Buat database baru dengan nama `merchflow`.
+4. Pilih database tersebut.
+5. Buka file `merchflow.sql` dari repository.
+6. Jalankan SQL script untuk mengimpor struktur tabel dan data.
+7. Setelah proses selesai, sesuaikan konfigurasi database pada `.env`.
+
+**Catatan penting:**
+
+- Pilih salah satu metode untuk menyiapkan database.
+- Jangan mengimpor file SQL ke database yang sudah memiliki tabel hasil migration tanpa memahami dampaknya.
+- Jangan menjalankan `php artisan migrate:fresh` pada database yang berisi data penting karena perintah tersebut menghapus tabel dan data sebelum membuat ulang.
+- File `merchflow.sql` disediakan sebagai database export untuk kebutuhan pemulihan dan demonstrasi proyek.
 
 ### Langkah 7 — Instal dan Build Asset Frontend
+
+Jalankan:
 
 ```bash
 npm install
 npm run build
 ```
 
-Untuk pengembangan frontend:
+Untuk pengembangan frontend, gunakan:
 
 ```bash
 npm run dev
 ```
 
+Perintah `npm run dev` menjalankan proses Vite untuk kebutuhan pengembangan dan biasanya dibiarkan aktif pada terminal terpisah.
+
 ### Langkah 8 — Jalankan Aplikasi
+
+Jalankan server Laravel:
 
 ```bash
 php artisan serve
@@ -344,31 +399,43 @@ uas-wad-merchflow/
 │
 ├── bootstrap/
 │   └── app.php
+│
 ├── database/
 │   ├── migrations/
 │   └── seeders/
+│       ├── DatabaseSeeder.php
+│       ├── CategorySeeder.php
+│       └── ProductSeeder.php
+│
 ├── docs/
 │   └── erd-merchflow.png
+│
 ├── public/
+│
 ├── resources/
 │   └── views/
 │       ├── auth/
 │       ├── categories/
+│       ├── dashboard/
+│       │   └── index.blade.php
 │       ├── layouts/
 │       ├── orders/
-│       ├── products/
-│       └── dashboard.blade.php
+│       └── products/
+│
 ├── routes/
 │   └── web.php
+│
 ├── .env.example
 ├── artisan
 ├── composer.json
 ├── composer.lock
+├── merchflow.sql
 ├── package.json
 └── README.md
 ```
 
 Struktur tersebut menunjukkan pemisahan tanggung jawab dalam aplikasi Laravel:
+
 - `app/Models`: representasi data dan relasi database.
 - `app/Http/Controllers`: mengelola proses aplikasi dan permintaan pengguna.
 - `app/Http/Middleware`: memeriksa autentikasi dan hak akses.
@@ -376,6 +443,7 @@ Struktur tersebut menunjukkan pemisahan tanggung jawab dalam aplikasi Laravel:
 - `database/seeders`: menyediakan mekanisme pengisian data awal.
 - `resources/views`: menyimpan tampilan aplikasi menggunakan Blade.
 - `routes/web.php`: mendefinisikan alamat dan pengaturan akses halaman.
+- `docs`: menyimpan dokumentasi pendukung, termasuk ERD.
 
 ## 9. Gambaran Database
 
@@ -431,7 +499,7 @@ Diagram mencakup lima tabel utama, yaitu `users`, `categories`, `products`, `ord
 7. Sistem memperbarui stok produk berdasarkan jumlah yang dipesan.
 8. Dashboard menampilkan ringkasan data produk dan pesanan.
 
-**Catatan:** implementasi pemesanan saat ini menggunakan satu produk untuk setiap pesanan pada alur pengelolaan pesanan. Tabel `order_items` digunakan untuk menyimpan detail produk pesanan.
+**Catatan:** Implementasi pemesanan saat ini menggunakan satu produk untuk setiap pesanan pada alur pengelolaan pesanan. Tabel `order_items` digunakan untuk menyimpan detail produk pesanan.
 
 ## 10. Route dan Halaman Utama
 
@@ -454,9 +522,11 @@ Untuk melihat daftar route lengkap, jalankan:
 php artisan route:list
 ```
 
-## 11. Pengujian Manual
+## 11. Skenario Pengujian Manual
 
-Pengujian manual dilakukan untuk memastikan fungsi utama MerchFlow berjalan sesuai kebutuhan.
+Berikut merupakan skenario pengujian yang digunakan untuk mengevaluasi fungsi utama MerchFlow.
+
+Pengujian mencakup autentikasi, pengelolaan kategori, produk, pesanan, perubahan stok, dan pembatasan hak akses pengguna.
 
 | No. | Skenario | Hasil yang Diharapkan |
 |---|---|---|
@@ -479,18 +549,21 @@ Pengujian manual dilakukan untuk memastikan fungsi utama MerchFlow berjalan sesu
 ## 12. Keamanan dan Catatan Pengembangan
 
 ### 12.1 Autentikasi
+
 - Login menggunakan mekanisme autentikasi Laravel.
 - Password pengguna disimpan dalam bentuk hash.
 - Session diperbarui setelah login.
 - Session diinvalidasi ketika pengguna logout.
 
 ### 12.2 Otorisasi dan Role
+
 - Aplikasi menggunakan middleware `CheckRole`.
 - Role Admin dan Staff memiliki hak akses berbeda.
 - Route tertentu dibatasi berdasarkan role.
 - Pengguna Staff tidak diizinkan mengakses fungsi penghapusan data.
 
 ### 12.3 Perlindungan Form dan Input
+
 - Form menggunakan CSRF protection melalui `@csrf`.
 - Form perubahan data menggunakan method spoofing Laravel seperti `@method('PUT')` dan `@method('DELETE')`.
 - Input divalidasi sebelum diproses dan disimpan.
@@ -498,12 +571,14 @@ Pengujian manual dilakukan untuk memastikan fungsi utama MerchFlow berjalan sesu
 - Pengelolaan data menggunakan Eloquent ORM untuk membantu mengurangi risiko SQL Injection.
 
 ### 12.4 Konsistensi Data
+
 - Proses perubahan stok menggunakan database transaction.
 - Penguncian baris produk digunakan pada proses perubahan stok yang memerlukannya.
 - Sistem memeriksa ketersediaan stok sebelum menerima pesanan.
 - Penghapusan kategori dan produk dibatasi apabila masih memiliki relasi data yang digunakan.
 
 ### 12.5 Pengelolaan Environment
+
 - File `.env` tidak boleh dibagikan atau diunggah ke repository.
 - Repository menyediakan `.env.example` sebagai contoh konfigurasi.
 - Kredensial database dan application key harus disesuaikan dengan lingkungan masing-masing.
@@ -518,8 +593,8 @@ MerchFlow telah disiapkan untuk dijalankan secara online melalui layanan Clever 
 | Platform | Clever Cloud |
 | Runtime PHP | PHP 8.3 |
 | Web root | `/public` |
-| URL aplikasi | https://uas-wad-merchflow.cleverapps.io |
-| Source code | https://github.com/Dhafin0804/uas-wad-merchflow |
+| URL aplikasi | [https://uas-wad-merchflow.cleverapps.io](https://uas-wad-merchflow.cleverapps.io) |
+| Source code | [https://github.com/Dhafin0804/uas-wad-merchflow](https://github.com/Dhafin0804/uas-wad-merchflow) |
 
 Aplikasi menggunakan direktori `public` sebagai web root sesuai struktur standar Laravel.
 
@@ -546,6 +621,14 @@ php artisan migrate:status
 ```bash
 php artisan migrate
 ```
+
+**Menjalankan database seeder**
+
+```bash
+php artisan db:seed
+```
+
+Perintah tersebut digunakan untuk mengisi data awal aplikasi, termasuk akun pengguna, kategori, dan produk.
 
 **Membersihkan cache aplikasi**
 

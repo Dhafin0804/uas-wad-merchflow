@@ -78,7 +78,7 @@ CREATE TABLE `categories` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `categories_name_unique` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -87,7 +87,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (1,'Merch',NULL,'2026-10-31 21:40:13','2026-10-31 21:40:13'),(2,'Konveksi','Konveksi/apparel','2026-10-31 22:14:32','2026-10-31 22:14:50');
+INSERT INTO `categories` VALUES (1,'Merch',NULL,'2026-10-31 21:40:13','2026-10-31 21:40:13'),(2,'Konveksi','Konveksi/apparel','2026-10-31 22:14:32','2026-10-31 22:14:50'),(3,'Kaos','Produk kaos untuk acara dan merchandise.','2026-11-01 09:46:49','2026-11-01 09:46:49'),(4,'Hoodie','Produk hoodie untuk merchandise.','2026-11-01 09:46:49','2026-11-01 09:46:49'),(5,'Tote Bag','Tas kain untuk kebutuhan acara.','2026-11-01 09:46:50','2026-11-01 09:46:50');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -317,7 +317,7 @@ CREATE TABLE `products` (
   PRIMARY KEY (`id`),
   KEY `products_category_id_foreign` (`category_id`),
   CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,7 +326,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,1,'Totebag Blacu','Totebag berbahan blacu dengan media cetak sublimasi 1 sisi',13000.00,66,NULL,1,'2026-10-31 21:41:29','2026-10-31 21:45:47'),(3,1,'lanyard custom','Lanyard tisu custom',8000.00,100,NULL,1,'2026-11-01 01:20:54','2026-11-01 01:22:42');
+INSERT INTO `products` VALUES (1,1,'Totebag Blacu','Totebag berbahan blacu dengan media cetak sublimasi 1 sisi',13000.00,66,NULL,1,'2026-10-31 21:41:29','2026-10-31 21:45:47'),(3,1,'lanyard custom','Lanyard tisu custom',8000.00,100,NULL,1,'2026-11-01 01:20:54','2026-11-01 01:22:42'),(4,3,'Kaos Custom Event','Kaos custom untuk kebutuhan acara dan organisasi.',75000.00,100,NULL,1,'2026-11-01 09:46:50','2026-11-01 09:46:50'),(5,4,'Hoodie Custom','Hoodie custom untuk merchandise komunitas.',150000.00,50,NULL,1,'2026-11-01 09:46:50','2026-11-01 09:46:50'),(6,5,'Tote Bag Custom','Tote bag custom untuk seminar dan acara.',35000.00,100,NULL,1,'2026-11-01 09:46:50','2026-11-01 09:46:50');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -387,7 +387,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Admin MerchFlow','admin@merchflow.test','2026-10-31 11:42:39','$2y$12$oEX3sIGb3.v848WKKpzy8.H5dRmY1Exg5AV3H0z4/gEdq8pJCo8jG',NULL,'2026-10-31 11:42:39','2026-11-01 00:51:31','admin'),(2,'Budi Santoso','budi@merchflow.test','2026-10-31 11:45:46','$2y$12$.uyKUmWFct/nAlE0cjUEtOijvd9lZKHWlCcxAJ9iQRI6km42FXlN.',NULL,'2026-10-31 11:45:46','2026-11-01 00:51:36','staff');
+INSERT INTO `users` VALUES (1,'Admin MerchFlow','admin@merchflow.test','2026-11-01 09:46:47','$2y$12$tYg2Ks.SAcllF5S/BrniJ.1pcWgeRz0BALupmZ8qEZuLBy60S45Xm',NULL,'2026-10-31 11:42:39','2026-11-01 09:46:49','admin'),(2,'Budi Santoso','budi@merchflow.test','2026-11-01 09:46:49','$2y$12$jghTqak5GWkMeE7w3w57huxMKIpak6lpV8aLz9A2YcTtvVGPpJxbW',NULL,'2026-10-31 11:45:46','2026-11-01 09:46:49','staff');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,4 +404,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-11-01 15:55:10
+-- Dump completed on 2026-11-01 17:04:37
