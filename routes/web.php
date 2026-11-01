@@ -9,7 +9,9 @@ use App\Http\Controllers\AuthController;
 
 // Halaman utama
 Route::get('/', function () {
-    return view('welcome');
+    return auth()->check()
+        ? redirect()->route('dashboard')
+        : redirect()->route('login');
 });
 
 // Authentication
